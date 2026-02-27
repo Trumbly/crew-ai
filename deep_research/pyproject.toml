@@ -5,8 +5,7 @@ description = "Multi-agent competitive intelligence system for the German DSO ma
 authors = [{ name = "Maximilian Noelle-Wying", email = "you@example.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "crewai[tools,anthropic]>=0.108.0,<1.0.0 ; python_version < '3.13'",
-    "crewai[tools,anthropic]>=0.108.0 ; python_version >= '3.13'",
+    "crewai[tools,anthropic]>=1.9.0",
     "crewai[tools]==1.9.3",
     "fastapi>=0.115.0",
     "uvicorn>=0.34.0",
