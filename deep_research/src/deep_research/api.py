@@ -526,4 +526,5 @@ async def download_md(job_id: str):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("api:app", host="0.0.0.0", port=8042, reload=True)
+    port = int(os.environ.get("PORT", 8042))
+    uvicorn.run("deep_research.api:app", host="0.0.0.0", port=port, reload=True)

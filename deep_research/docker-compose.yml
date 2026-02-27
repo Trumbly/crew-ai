@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports:
+      - "${PORT:-8042}:${PORT:-8042}"
+    environment:
+      - port=8042
+    env_file:
+      - .env
+    volumes:
+      - ./output:/app/output
+    restart: unless-stopped
