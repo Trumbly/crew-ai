@@ -1,0 +1,25 @@
+[project]
+name = "deep_research"
+version = "0.1.0"
+description = "Multi-agent competitive intelligence system for the German DSO market"
+authors = [{ name = "Maximilian Noelle-Wying", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]==1.9.3",
+    "python-dotenv>=1.0.0",
+    "reportlab>=4.0",
+]
+
+[project.scripts]
+deep_research = "deep_research.main:run"
+run_crew = "deep_research.main:run"
+train = "deep_research.main:train"
+replay = "deep_research.main:replay"
+test = "deep_research.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

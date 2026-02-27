@@ -1,0 +1,145 @@
+# ─── Layer 1: Research Tasks ─────────────────────────────────
+
+company_research:
+  description: >
+    Investigate **{target}** thoroughly. Cover:
+    (1) Company overview: name, HQ, founding, legal form
+    (2) Team & leadership: key people, team size
+    (3) Product & services: core offering, features, pricing
+    (4) Customers & case studies: named customers, segments
+    (5) Funding & financials: rounds, investors, revenue signals
+    (6) Partnerships & ecosystem: integrations, consortiums
+    (7) Recent news: last 12 months
+
+    Search '{target}' in English AND German. Check website, LinkedIn,
+    Crunchbase. Search: '{target} DSO', '{target} funding',
+    '{target} Netzplanung', '{target} Verteilnetzbetreiber'.
+
+    Include [Source: URL] for EVERY claim.
+    Report facts only — no recommendations or strategy.
+    Keep your final output under 1500 words.
+  expected_output: >
+    Structured factual research document (max 1500 words) with 7 sections.
+    Every claim has [Source: URL]. Unverified info clearly marked.
+    No opinions or recommendations.
+  agent: company_researcher
+
+market_research:
+  description: >
+    Analyze market landscape around **{target}**. Cover:
+    (1) Market context: DSO digitalization market, key drivers
+    (2) Competitive landscape: 5+ competitors with name, focus, differentiator
+    (3) Positioning analysis: where does {target} sit vs competitors?
+    (4) Go-to-market approach: sales, channels, conferences
+    (5) Strategic trends: market shifts relevant to this segment
+    (6) White spaces: unaddressed problems in the market
+
+    Search in English AND German. Check BDEW, dena, VKU publications.
+    Include [Source: URL] for EVERY claim.
+    Report facts only — no recommendations or strategy.
+    Keep your final output under 1500 words.
+  expected_output: >
+    Factual market analysis (max 1500 words) with competitive landscape,
+    positioning, and gap analysis. Every claim sourced.
+    No opinions or recommendations.
+  agent: market_researcher
+
+technical_research:
+  description: >
+    Analyze the technical product of **{target}**. Cover:
+    (1) Core technology: SaaS/on-prem, cloud provider, architecture
+    (2) Data model & standards: CIM/CGMES, GIS, data formats
+    (3) Integrations: APIs, ERP, SCADA, grid calculation engines
+    (4) Tech stack: check job postings for technologies
+    (5) Technical differentiators: AI/ML, real-time, digital twin
+    (6) Technical limitations and gaps
+
+    Search '{target} API', '{target} integration', '{target} CIM'.
+    Check GitHub, job postings, technical presentations.
+    Include [Source: URL] for EVERY claim.
+    Report facts only — no recommendations or strategy.
+    Keep your final output under 1500 words.
+  expected_output: >
+    Factual technical analysis (max 1500 words) covering architecture,
+    stack, integrations, differentiation. Source URLs for every claim.
+    No opinions or recommendations.
+  agent: technical_researcher
+
+# ─── Layer 2: Validation Task ────────────────────────────────
+
+validation:
+  description: >
+    Validate research findings about **{target}** from three analysts.
+
+    YOUR TASK (be concise — max 1000 words output):
+    (1) Cross-reference: do reports agree? Any contradictions?
+    (2) Spot-check: verify the 5 most important claims with search
+    (3) Assign confidence: HIGH/MEDIUM/LOW/UNVERIFIED
+    (4) Identify critical gaps
+    (5) Flag contradictions between reports
+
+    Focus only on the most critical findings. Do NOT repeat all details
+    from the research reports.
+  expected_output: >
+    Concise validation report (max 1000 words): confidence scores
+    for key findings, contradictions, unverified claims, gaps,
+    and overall quality score 1-10.
+  agent: validator
+  context:
+    - company_research
+    - market_research
+    - technical_research
+
+# ─── Layer 3: Synthesis Task ─────────────────────────────────
+
+synthesis:
+  description: >
+    Synthesize validated research on **{target}** into a factual
+    competitive intelligence dossier.
+
+    This report serves as a NEUTRAL INFORMATION BASE for decision-makers.
+    Do NOT include strategic recommendations, action items, or advice.
+    Do NOT reference or compare to any specific startup, client, or reader.
+    Present facts and let the reader draw their own conclusions.
+
+    REPORT STRUCTURE:
+
+    # Competitive Intelligence Dossier: {target}
+
+    ## Executive Summary
+    5-7 key factual findings, each marked with [HIGH/MEDIUM/LOW]
+
+    ## Company Profile
+    Key facts table: Name, HQ, Founded, Team Size, Funding, Key People
+
+    ## Product & Technology
+    What they build, how it works, technical architecture, stack
+
+    ## Market Position & Competitive Landscape
+    Where they sit in the market, who the competitors are, market dynamics
+
+    ## Strengths & Weaknesses
+    Factual assessment of what they do well and where gaps exist
+    (based on evidence, not speculation)
+
+    ## Notable Observations
+    Things that are easy to overlook, unusual patterns, or non-obvious
+    findings that a decision-maker should be aware of. Present these
+    as factual observations, NOT as recommendations.
+
+    ## Open Questions
+    What remains unknown or unverified that would require further research
+
+    ## Sources
+    Full list of sources used, organized by section
+
+    Mark every claim with [HIGH], [MEDIUM], or [LOW] confidence.
+    Keep the report under 3000 words total.
+  expected_output: >
+    Complete factual CI dossier in Markdown (max 3000 words).
+    Every claim marked with confidence. No strategic recommendations.
+    No references to any specific startup or client.
+    Neutral, evidence-based throughout.
+  agent: synthesizer
+  context:
+    - validation
