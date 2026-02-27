@@ -4,7 +4,7 @@ services:
     ports:
       - "${PORT:-8042}:${PORT:-8042}"
     environment:
-      - port=8042
+      - PORT=${PORT:-8042}
     env_file:
       - .env
     volumes:
