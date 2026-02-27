@@ -6,6 +6,8 @@ authors = [{ name = "Maximilian Noelle-Wying", email = "you@example.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[tools]==1.9.3",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
     "python-dotenv>=1.0.0",
     "reportlab>=4.0",
 ]
