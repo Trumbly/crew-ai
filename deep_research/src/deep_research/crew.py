@@ -133,5 +133,5 @@ class DeepResearchCrew:
             verbose=True,
             memory=False,
             respect_context_window=True,
-            max_rpm=1,
+            max_rpm=int(os.getenv("MAX_RPM", 10)),
         )
